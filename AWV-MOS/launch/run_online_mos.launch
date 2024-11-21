@@ -15,5 +15,8 @@
     <!-- AWV-MOS online mos -->
     <node pkg="awv_mos" type="run_online_mos"      name="run_online_mos"       output="screen"     respawn="false"/>
 
-    <node pkg="rviz" type="rviz" name="awv_mos_rviz" output="log" args="-d $(find awv_mos)/config/rviz/scan_view_nuscenes.rviz" />
+    <!-- <node pkg="rviz" type="rviz" name="awv_mos_rviz" output="log" args="-d $(find awv_mos)/config/rviz/scan_view_nuscenes.rviz" /> -->
+    <node pkg="rviz" type="rviz" name="awv_mos_rviz" output="log" args="-d $(find awv_mos)/config/rviz/segment_viz.rviz" />
+
+
 </launch>

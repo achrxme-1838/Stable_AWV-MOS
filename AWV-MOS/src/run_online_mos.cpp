@@ -170,6 +170,9 @@ int main(int argc, char** argv)
                     std::string prediction_write_file_name = prediction_write_path + prediction_file_name;
                     awv_mos.WritePrediction(segmented_scan, prediction_write_file_name);
                 }
+                // std::cout << "awv_mos.m_cfg_b_publish_pc" << awv_mos.m_cfg_b_publish_pc << std::endl;
+                awv_mos.m_cfg_b_publish_pc = true;
+
                 if(awv_mos.m_cfg_b_publish_pc == true)
                 {
                     float tmp_x, tmp_y, tmp_z, tmp_roll, tmp_pitch, tmp_yaw;
@@ -188,6 +191,20 @@ int main(int argc, char** argv)
                     transformStamped.transform.rotation.z = q.z;
                     transformStamped.transform.rotation.w = q.w;
                     br.sendTransform(transformStamped);
+
+
+                    // geometry_msgs::TransformStamped transformStamped2;
+                    // transformStamped2.header.stamp = ros::Time::now();
+                    // transformStamped2.header.frame_id = "body";  // Parent frame
+                    // transformStamped2.child_frame_id = "PandarXT-32";  // Child frame
+                    // transformStamped2.transform.translation.x = 0.0;  // Replace with the actual x offset
+                    // transformStamped2.transform.translation.y = 0.0;
+                    // transformStamped2.transform.translation.z = 0.0;
+                    // transformStamped2.transform.rotation.x = 0.0;  // Replace with the actual quaternion x
+                    // transformStamped2.transform.rotation.y = 0.0;
+                    // transformStamped2.transform.rotation.z = 0.0;
+                    // transformStamped2.transform.rotation.w = 1.0;
+                    // br.sendTransform(transformStamped2);
 
                     sensor_msgs::PointCloud2 segmented_query_scan_all_all;
                     pcl::toROSMsg(*segmented_scan, segmented_query_scan_all_all);
