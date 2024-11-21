@@ -10,6 +10,11 @@ endif()
 set(CMAKE_CXX_FLAGS "-std=c++17")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+# set(CMAKE_CXX_STANDARD 17)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_EXTENSIONS OFF)
+
 find_package(catkin REQUIRED COMPONENTS
   tf
   roscpp
@@ -36,6 +41,7 @@ message(STATUS "The value of TBB_LIBRARIES is: ${TBB_LIBRARIES}")
 find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(GTSAM REQUIRED)
+find_package(Threads REQUIRED)
 
 add_message_files(
   DIRECTORY msg
@@ -89,13 +95,13 @@ link_directories(
 # Mapping Optimization
 add_executable(${PROJECT_NAME}_mapOptmization src/mapOptmization.cpp)
 add_dependencies(${PROJECT_NAME}_mapOptmization ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(${PROJECT_NAME}_mapOptmization ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} gtsam TBB::tbb awv_mos)
+target_link_libraries(${PROJECT_NAME}_mapOptmization ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} gtsam TBB::tbb Threads::Threads awv_mos)
 
 # Feature Association
 add_executable(${PROJECT_NAME}_FeatureExtractionModule src/FeatureExtractionModule.cpp)
 add_dependencies(${PROJECT_NAME}_FeatureExtractionModule ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(${PROJECT_NAME}_FeatureExtractionModule ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} TBB::tbb)
+target_link_libraries(${PROJECT_NAME}_FeatureExtractionModule ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} TBB::tbb Threads::Threads)
 
 # IMU Preintegration
 add_executable(${PROJECT_NAME}_imuPreintegration src/imuPreintegration.cpp)
-target_link_libraries(${PROJECT_NAME}_imuPreintegration ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam TBB::tbb)
+target_link_libraries(${PROJECT_NAME}_imuPreintegration ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam TBB::tbb Threads::Threads)

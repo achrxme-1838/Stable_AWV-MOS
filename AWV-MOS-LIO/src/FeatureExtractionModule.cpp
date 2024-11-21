@@ -2,6 +2,7 @@
 
 #include "awv_mos_lio/cloud_info.h"
 
+#include <thread>
 #include <ros/ros.h>
 
 #include <pcl_conversions/pcl_conversions.h>

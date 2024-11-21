@@ -10,6 +10,10 @@ endif()
 set(CMAKE_CXX_FLAGS "-std=c++17")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
+# set(CMAKE_CXX_STANDARD 17)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_EXTENSIONS OFF)
+
 find_package(catkin REQUIRED COMPONENTS
   tf
   roscpp
@@ -31,6 +35,7 @@ message(STATUS "The value of TBB_LIBRARY_DIRS is: ${TBB_LIBRARY_DIRS}")
 message(STATUS "The value of TBB_LIBRARIES is: ${TBB_LIBRARIES}")
 
 find_package(PCL REQUIRED)
+find_package(Threads REQUIRED)
 
 generate_messages(
   DEPENDENCIES
