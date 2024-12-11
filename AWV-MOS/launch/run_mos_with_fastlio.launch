@@ -1,0 +1,34 @@
+<launch>
+    <arg name="scan_topic" default="/hesai/pandar" />
+    <arg name="pose_topic" default="/Odometry" />
+    <arg name="config_file_name" default="params_hesai.yaml"/>
+
+    <arg name="m_config_file_path" default="$(find awv_mos)/config/$(arg config_file_name)"/>
+    <!-- Parameters -->
+    <param name="scan_topic" value="$(arg scan_topic)" />
+    <param name="pose_topic" value="$(arg pose_topic)" />
+    <param name="prediction_write_path" value="$(find awv_mos)/history/predictions/online_mos/custom/predictions/" />
+    <param name="m_config_file_path" value="$(arg m_config_file_path)" />
+    <param name="m_log_write_folder_path" value="$(find awv_mos)/history/log/" />
+    <rosparam file="$(arg m_config_file_path)" command="load" />
+
+    <!-- AWV-MOS online mos -->
+    <node pkg="awv_mos" type="run_online_mos"      name="run_online_mos"       output="screen"     respawn="false"/>
+
+    <!-- <node pkg="rviz" type="rviz" name="awv_mos_rviz" output="log" args="-d $(find awv_mos)/config/rviz/scan_view_nuscenes.rviz" /> -->
+    <node pkg="rviz" type="rviz" name="awv_mos_rviz" output="log" args="-d $(find awv_mos)/config/rviz/segment_viz.rviz" />
+
+    
+	<!-- <rosparam command="load" file="$(find fast_lio)/config/avia.yaml" /> -->
+	<rosparam command="load" file="$(find fast_lio)/config/hesai.yaml" />
+
+	<param name="feature_extract_enable" type="bool" value="0"/>
+	<param name="point_filter_num" type="int" value="3"/>
+	<param name="max_iteration" type="int" value="3" />
+	<param name="filter_size_surf" type="double" value="0.5" />
+	<param name="filter_size_map" type="double" value="0.5" />
+	<param name="cube_side_length" type="double" value="1000" />
+	<param name="runtime_pos_log_enable" type="bool" value="0" />
+    <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" /> 
+
+</launch>

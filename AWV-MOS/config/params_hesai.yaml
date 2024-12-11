@@ -43,22 +43,32 @@ awv_mos:
   m_cfg_f_range_image_noise_filtering_min_diff_m: 1.0
 
   # - Motion belief calculation params
-  m_cfg_f_moving_confidence: 0.35
-  m_cfg_f_static_confidence: 0.5
+  m_cfg_f_moving_confidence: 0.35 #0.35
+  m_cfg_f_static_confidence: 0.5 #0.5
 
   # - Object Scale Test params
   m_cfg_b_use_object_scale_test: true
   m_cfg_f_object_scale_test_valid_visible_range_m: 7.0
   m_cfg_f_object_scale_test_min_height_m: 0.15
-  m_cfg_f_object_scale_test_min_visible_area_m2: 0.135 
-  m_cfg_f_object_scale_test_point_search_radius_m: 2.0
+  m_cfg_f_object_scale_test_min_visible_area_m2: 0.135
+  m_cfg_f_object_scale_test_point_search_radius_m: 1.0
+  # m_cfg_b_use_object_scale_test: true
+  # m_cfg_f_object_scale_test_valid_visible_range_m: 7.0
+  # m_cfg_f_object_scale_test_min_height_m: 0.15
+  # m_cfg_f_object_scale_test_min_visible_area_m2: 0.135 
+  # m_cfg_f_object_scale_test_point_search_radius_m: 2.0
 
   # - Resgion Growing params
-  m_cfg_b_use_region_growing: false
+  m_cfg_b_use_region_growing: true
   m_cfg_f_region_growing_voxel_leaf_size_m: 0.15
   m_cfg_f_region_growing_max_iteration: 30
   m_cfg_f_region_growing_point_search_radius_m: 0.15
   m_cfg_f_region_growing_ground_filter_height_m: 0.06
+  # m_cfg_b_use_region_growing: false
+  # m_cfg_f_region_growing_voxel_leaf_size_m: 0.15
+  # m_cfg_f_region_growing_max_iteration: 30
+  # m_cfg_f_region_growing_point_search_radius_m: 0.15
+  # m_cfg_f_region_growing_ground_filter_height_m: 0.06
 
   # - CPU Params
   m_cfg_n_num_cpu_cores: 0      # 0: use all cores

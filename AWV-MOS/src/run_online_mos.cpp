@@ -192,22 +192,11 @@ int main(int argc, char** argv)
                     transformStamped.transform.rotation.w = q.w;
                     br.sendTransform(transformStamped);
 
-
-                    // geometry_msgs::TransformStamped transformStamped2;
-                    // transformStamped2.header.stamp = ros::Time::now();
-                    // transformStamped2.header.frame_id = "body";  // Parent frame
-                    // transformStamped2.child_frame_id = "PandarXT-32";  // Child frame
-                    // transformStamped2.transform.translation.x = 0.0;  // Replace with the actual x offset
-                    // transformStamped2.transform.translation.y = 0.0;
-                    // transformStamped2.transform.translation.z = 0.0;
-                    // transformStamped2.transform.rotation.x = 0.0;  // Replace with the actual quaternion x
-                    // transformStamped2.transform.rotation.y = 0.0;
-                    // transformStamped2.transform.rotation.z = 0.0;
-                    // transformStamped2.transform.rotation.w = 1.0;
-                    // br.sendTransform(transformStamped2);
-
                     sensor_msgs::PointCloud2 segmented_query_scan_all_all;
                     pcl::toROSMsg(*segmented_scan, segmented_query_scan_all_all);
+
+                    // segmented_query_scan_all_all -> txt file (/root/ros_ws/src/AWV-MOS/data/exp01/input
+
                     segmented_query_scan_all_all.header = scan_msg.header;
                     pub_segmented_query_scan_all.publish(segmented_query_scan_all_all);
 
@@ -221,12 +210,16 @@ int main(int argc, char** argv)
                             segmented_query_scan_dynamic->points.push_back(point);
                     }
                     sensor_msgs::PointCloud2 segmented_query_scan_static_msg, segmented_query_scan_dynamic_msg;
+
+                    // segmented_query_scan_dynamic_msg -> txt file
+
                     pcl::toROSMsg(*segmented_query_scan_static, segmented_query_scan_static_msg);
                     pcl::toROSMsg(*segmented_query_scan_dynamic, segmented_query_scan_dynamic_msg);
                     segmented_query_scan_static_msg.header = scan_msg.header;
                     segmented_query_scan_dynamic_msg.header = scan_msg.header;
                     pub_segmented_query_scan_static.publish(segmented_query_scan_static_msg);
                     pub_segmented_query_scan_dynamic.publish(segmented_query_scan_dynamic_msg);
+
                 }
             } 
             else 
